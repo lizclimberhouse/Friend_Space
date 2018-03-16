@@ -10,7 +10,8 @@ class FetchPosts extends React.Component {
   // state = { loaded: true }
 
   componentDidMount() {
-    this.props.dispatch(getPosts(this.setLoaded))
+    this.props.dispatch(getPosts())
+    // .then( res => {this.props.dispatch({ type: 'HEADERS', headers: res.headers })})
   }
 
   // setLoaded = () => {

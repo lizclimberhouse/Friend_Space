@@ -30,6 +30,7 @@ class PostForm extends React.Component {
     const { closeForm, dispatch } = this.props
     const func = this.props.id ? updatePost : addPost
     dispatch(func(post))
+    // debugger
     closeForm()
   }
 

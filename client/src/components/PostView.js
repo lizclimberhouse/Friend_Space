@@ -15,8 +15,9 @@ class PostView extends React.Component {
   }
 
   removePost = () => {
-    const { post: { id }, dispatch, history } = this.props
-    dispatch(deletePost(id))
+    const { post , dispatch, history } = this.props
+    dispatch(deletePost(post.id))
+    // debugger
     history.push('/posts')
   }
 
