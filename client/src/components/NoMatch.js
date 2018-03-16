@@ -1,16 +1,11 @@
-import React, { Component } from 'react';
-import { Header } from 'semantic-ui-react';
+import React from 'react';
 import { Link } from 'react-router-dom';
+import { Header } from 'semantic-ui-react';
 
-class NoMatch extends Component {
-  render() {
-    return (
-      <Header as='h1' textAlign='center'>
-        Page Not Found
-        <Link to='/'> Home</Link>
-      </Header>
-    );
-  }
-}
+const NoMatch = () => (
+  <Header as="h3" textAlign="center">
+    Page not found return <Link to="/">Home</Link>
+  </Header>
+)
 
 export default NoMatch;

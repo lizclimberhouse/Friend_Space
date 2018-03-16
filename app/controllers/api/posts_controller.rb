@@ -1,8 +1,9 @@
 class Api::PostsController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_post, only: [:show, :update, :destroy]
 
   def index
-    render json: Post.all
+    render json: Post.all.order(created_at: :desc)
   end
 
   def show
@@ -37,6 +38,6 @@ class Api::PostsController < ApplicationController
     end
 
     def post_params
-      params.require(:post).permit(:title, :date, :body, :image)
+      params.require(:post).permit(:title, :date, :body, :image, :author)
     end
 end

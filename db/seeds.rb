@@ -6,11 +6,12 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 25.times do
-  title = Faker::Hacker.ingverb,
+  title = Faker::Hacker.ingverb
   Post.create(
     title: title,
     date: Faker::Date.between(2.days.ago, Date.today),
     body: Faker::Hacker.say_something_smart,
-    image: Faker::Avatar.image(title, '50x50', 'png', 'set2')
+    image: Faker::Avatar.image(title, '50x50', 'png', 'set2'),
+    author: Faker::Name.name,
   )
 end
