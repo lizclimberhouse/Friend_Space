@@ -50,3 +50,24 @@ Button {
   border-left: 1px solid #e0e1e2;
   border-right: 1px solid #e0e1e2;
 }
+
+#user_pic {
+  height: 400px;
+  width: 400px;
+  background-color: azure;
+}
+
+#home_page {
+  display: flex;
+  flex-direction: row;
+}
+
+#home_main {
+  display: flex;
+  flex-direction: column;
+}
+
+/* #home_side {
+  display: flex;
+  flex-direction: column;
+} */

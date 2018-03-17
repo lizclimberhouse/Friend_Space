@@ -35,7 +35,7 @@ class NavBar extends Component {
       <div>
         <Menu pointing secondary>
           <Link id="nav_btn" to='/'>
-            <Menu.Item name='home' />
+            <Menu.Item name='MySpace Home' />
           </Link>
           <Link id="nav_btn" to='/posts'>
             <Menu.Item name='posts' />

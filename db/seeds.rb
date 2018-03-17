@@ -17,9 +17,11 @@
 end
 
 15.times do
+  name = Faker::Name.name
   Friend.create(
-    name:
-    oneline:
-    picture:
-    
+    name: name,
+    quote: Faker::Hacker.say_something_smart,
+    picture: Faker::Avatar.image(name, '50x50', 'png', 'set1'),
+    city: Faker::Address.city,
   )
+end

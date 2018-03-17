@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 import { getPosts } from '../actions/posts';
 import { Container, Grid, Header, Card, Image, Button, Dropdown, Divider, Comment, Icon } from 'semantic-ui-react';
 import PostForm from './PostForm';
-import '../css.css';
 
 class Posts extends React.Component {
 
