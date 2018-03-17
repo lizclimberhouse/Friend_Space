@@ -15,10 +15,8 @@ class PostView extends React.Component {
   }
 
   removePost = (post) => {
-    // debugger 
     const { post: {id}, dispatch, history } = this.props
     dispatch(deletePost(id))
-    // debugger
     history.push('/posts')
   }
 
@@ -27,13 +25,15 @@ class PostView extends React.Component {
     const { post = [] } = this.props;
     return (
       <Container>
-        <Link to="/posts">View All Posts</Link>
-        <Button onClick={this.togglePostForm}>
-          { showPostForm ? 'Cancel' : 'Edit' }
-        </Button>
-        <Button color="red" onClick={this.removePost}>
-          Delete
-        </Button>
+        <div id="spacers">
+          <Link id="back_btn" to="/posts">View All Posts</Link>
+          <Button color="blue" onClick={this.togglePostForm}>
+            { showPostForm ? 'Cancel' : 'Edit' }
+          </Button>
+          <Button color="red" onClick={this.removePost}>
+            Delete
+          </Button>
+        </div>
         { showPostForm ?
           <PostForm {...post} closeForm={this.togglePostForm} />
           :

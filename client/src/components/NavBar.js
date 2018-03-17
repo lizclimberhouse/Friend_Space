@@ -11,7 +11,7 @@ class NavBar extends Component {
     if (user.id) {
       return (
         <Menu.Menu position='right'>
-          <Menu.Item
+          <Menu.Item id="nav_btn"
             name='Logout'
             onClick={() => dispatch(handleLogout(history))}
           />
@@ -20,10 +20,10 @@ class NavBar extends Component {
     }
     return (
       <Menu.Menu position='right'>
-        <Link to='/register'>
+        <Link id="nav_btn" to='/register'>
           <Menu.Item name='Register' />
         </Link>
-        <Link to='/login'>
+        <Link id="nav_btn" to='/login'>
           <Menu.Item name='Login' />
         </Link>
       </Menu.Menu>
@@ -34,10 +34,10 @@ class NavBar extends Component {
     return (
       <div>
         <Menu pointing secondary>
-          <Link to='/'>
+          <Link id="nav_btn" to='/'>
             <Menu.Item name='home' />
           </Link>
-          <Link to='/posts'>
+          <Link id="nav_btn" to='/posts'>
             <Menu.Item name='posts' />
           </Link>
           { this.rightNavs() }

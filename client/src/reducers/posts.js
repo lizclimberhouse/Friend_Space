@@ -13,7 +13,6 @@ const posts = (state = [], action ) => {
     case ADD_POST:
       return [action.post, ...state]
     case UPDATE_POST:
-    debugger
       return state.map( p => {
         if (p.id === action.post.id)
           return action.post

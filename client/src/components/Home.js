@@ -18,7 +18,7 @@ class Home extends Component {
           <Divider />
         </Container>
         <Container>
-          <Link to="/posts">
+          <Link id="back_btn" to="/posts">
             Go to MySpace
           </Link>
         </Container>

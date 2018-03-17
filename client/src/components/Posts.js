@@ -33,23 +33,16 @@ class Posts extends React.Component {
         <Comment>
           <Comment.Avatar as="a" src={post.image} />
           <Comment.Content>
-            <Comment.Author as="a">{post.title}</Comment.Author>
-            
+            <Comment.Author as="a">{post.author}</Comment.Author>
             <Comment.Metadata>
               <div>{post.date}</div>
             </Comment.Metadata>
             <Divider />
-            <Comment.Author as="a">
-            <div>Written by: {post.author}</div>
-            </Comment.Author>
-            {/* <Comment.Metadata>
-              <div>{post.author}</div>
-            </Comment.Metadata> */}
             <Comment.Text>
-              {post.body}
+            <div>{post.title}</div>
             </Comment.Text>
             <Comment.Actions>
-              <Link to={`/posts/${post.id}`}>
+              <Link id="view_post_link" to={`/posts/${post.id}`}>
                 View Post
               </Link>
             </Comment.Actions>
@@ -57,30 +50,6 @@ class Posts extends React.Component {
         </Comment>
       </Comment.Group>
       </Container>
-
-      // <Card key={post.id}>
-      //   <Image src={post.image} />
-      //   <Card.Content>
-      //     <Card.Header>
-      //       {post.title}
-      //     </Card.Header>
-      //     <Card.Meta>
-      //       <span>
-      //         {post.author}
-      //         <br />
-      //         {post.date}
-      //       </span>
-      //     </Card.Meta>
-      //     <Card.Description>
-      //       {post.body}
-      //     </Card.Description>
-      //   </Card.Content>
-      //   <Card.Content extra>
-      //     <Link to={`/posts/${post.id}`}>
-      //       View Post
-      //     </Link>
-      //   </Card.Content>
-      // </Card>
     )
   }
 

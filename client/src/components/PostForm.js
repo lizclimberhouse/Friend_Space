@@ -30,7 +30,6 @@ class PostForm extends React.Component {
     const { closeForm, dispatch } = this.props
     const func = this.props.id ? updatePost : addPost
     dispatch(func(post))
-    // debugger
     closeForm()
   }
 
@@ -69,7 +68,7 @@ class PostForm extends React.Component {
           onChange={this.handleChange}
           label="Image"
         />
-        <Form.Button>Save</Form.Button>
+        <Form.Button color="green" >Save</Form.Button>
       </Form>
     )
   }
