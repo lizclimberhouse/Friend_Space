@@ -15,3 +15,11 @@
     author: Faker::Name.name,
   )
 end
+
+15.times do
+  Friend.create(
+    name:
+    oneline:
+    picture:
+    
+  )

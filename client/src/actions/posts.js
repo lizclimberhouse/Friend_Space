@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { setHeaders } from '../actions/headers';
+import { setHeaders } from './headers';
 
 export const POSTS = 'POSTS';
 export const ADD_POST = 'ADD_POST';
@@ -10,7 +10,7 @@ export const DELETE_POST = 'DELETE_POST';
 export const getPosts = () => {
   return (dispatch) => {
     axios.get('/api/posts')
-      .then( res => dispatch({ type: POSTS, post: res.data, headers: res.headers  }) )
+      .then( res => dispatch({ type: POSTS, posts: res.data, headers: res.headers  }) )
       // .then( res => dispatch({ type: POSTS, posts: res.data}) )
       // .then( res => dispatch(setHeaders(res.headers)))
     }

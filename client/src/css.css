@@ -1,0 +1,22 @@
+h6 {
+  color: rgba(0,0,0,.6);
+}
+
+#post_box {
+  border: 1px solid #e0e1e2;
+  margin: 10px 0px;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+#btn_space {
+  margin: 10px 0;
+}
+
+#spacers {
+  margin: 10px 0;
+}
+
+Button {
+  background-color: #e0e1e2;
+}

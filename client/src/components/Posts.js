@@ -2,8 +2,9 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { getPosts } from '../actions/posts';
-import { Container, Grid, Header, Card, Image, Button, Dropdown, Divider } from 'semantic-ui-react';
+import { Container, Grid, Header, Card, Image, Button, Dropdown, Divider, Comment, Icon } from 'semantic-ui-react';
 import PostForm from './PostForm';
+import '../css.css';
 
 class Posts extends React.Component {
 
@@ -27,27 +28,59 @@ class Posts extends React.Component {
       visible = posts.filter( p => p.author === author )
 
     return visible.map( post =>
-      <Card key={post.id}>
-        <Image src={post.image} />
-        <Card.Content>
-          <Card.Header>
-            {post.title}
-          </Card.Header>
-          <Card.Meta>
-            <span>
-              {post.author}
-            </span>
-          </Card.Meta>
-          <Card.Description>
-            {post.body}
-          </Card.Description>
-        </Card.Content>
-        <Card.Content extra>
-          <Link to={`/posts/${post.id}`}>
-            View Post
-          </Link>
-        </Card.Content>
-      </Card>
+      <Container>
+      <Comment.Group id="post_box" size='large' key={post.id}>
+        <Comment>
+          <Comment.Avatar as="a" src={post.image} />
+          <Comment.Content>
+            <Comment.Author as="a">{post.title}</Comment.Author>
+            
+            <Comment.Metadata>
+              <div>{post.date}</div>
+            </Comment.Metadata>
+            <Divider />
+            <Comment.Author as="a">
+            <div>Written by: {post.author}</div>
+            </Comment.Author>
+            {/* <Comment.Metadata>
+              <div>{post.author}</div>
+            </Comment.Metadata> */}
+            <Comment.Text>
+              {post.body}
+            </Comment.Text>
+            <Comment.Actions>
+              <Link to={`/posts/${post.id}`}>
+                View Post
+              </Link>
+            </Comment.Actions>
+          </Comment.Content>
+        </Comment>
+      </Comment.Group>
+      </Container>
+
+      // <Card key={post.id}>
+      //   <Image src={post.image} />
+      //   <Card.Content>
+      //     <Card.Header>
+      //       {post.title}
+      //     </Card.Header>
+      //     <Card.Meta>
+      //       <span>
+      //         {post.author}
+      //         <br />
+      //         {post.date}
+      //       </span>
+      //     </Card.Meta>
+      //     <Card.Description>
+      //       {post.body}
+      //     </Card.Description>
+      //   </Card.Content>
+      //   <Card.Content extra>
+      //     <Link to={`/posts/${post.id}`}>
+      //       View Post
+      //     </Link>
+      //   </Card.Content>
+      // </Card>
     )
   }
 
@@ -57,8 +90,8 @@ class Posts extends React.Component {
     return (
 
       <Container>
-        <Header as="h3" textAlign="center">Posts</Header>
-        <Button onClick={this.togglePostForm}>
+        <Header id="spacers" as="h3" textAlign="center">Posts</Header>
+        <Button id="btn_space" onClick={this.togglePostForm}>
           { showPostForm ? 'Hide Form' : 'Show Form' }
         </Button>
         { showPostForm ?

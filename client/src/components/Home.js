@@ -13,7 +13,7 @@ class Home extends Component {
   render() {
     return (
       <div>
-        <Header as='h1' textAlign='center'>Welcome to MySpace</Header>
+        <Header id="spacers" as='h1' textAlign='center'>Welcome to MySpace</Header>
         <Container>
           <Divider />
         </Container>
