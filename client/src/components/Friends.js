@@ -1,5 +1,6 @@
 import React from 'react';
 import { Card, Image, Grid, Divider, Icon } from 'semantic-ui-react';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import axios from 'axios';
 
@@ -34,11 +35,10 @@ class Friends extends React.Component {
                 </Card.Description>
               </Card.Content>
               <Card.Content extra>
-                <a>
+                <Link to={`/friends/${friend.id}`}>
                 <Icon name='user' />
-                  liked?
-                  {/* TODO add link here to view and like or dis-like? Maybe a checkbox instead of user */}
-                </a>
+                  View Profile
+                </Link>
               </Card.Content>
             </Card>
           )
@@ -48,4 +48,9 @@ class Friends extends React.Component {
   }
 }
 
-export default connect()(Friends)
+const mapStateToProps = (state) => {
+  const friends = state.friends;
+  return { friends }
+}
+
+export default connect(mapStateToProps)(Friends);

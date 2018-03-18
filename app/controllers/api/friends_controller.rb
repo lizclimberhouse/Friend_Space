@@ -1,5 +1,7 @@
 class Api::FriendsController < ApplicationController
   before_action :authenticate_user!
+  before_action :set_friend, only: [:show]
+
 
   def my_friends
     render json: User.liked(current_user.liked_friends)
@@ -10,6 +12,7 @@ class Api::FriendsController < ApplicationController
   end
 
   def show
+    render json: @friend
   end
 
   def create
@@ -22,4 +25,10 @@ class Api::FriendsController < ApplicationController
 
   def destroy
   end
+
+  private
+    def set_friend
+      @friend = Friend.find(params[:id])
+    end
+
 end

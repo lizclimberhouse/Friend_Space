@@ -27,8 +27,8 @@ class Posts extends React.Component {
       visible = posts.filter( p => p.author === author )
 
     return visible.map( post =>
-      <Container>
-      <Comment.Group id="post_box" size='large' key={post.id}>
+      <Container key={post.id}>
+      <Comment.Group id="post_box" size='large'>
         <Comment>
           <Comment.Avatar as="a" src={post.image} />
           <Comment.Content>

@@ -13,6 +13,7 @@ import Posts from './Posts';
 import FetchPosts from './FetchPosts';
 import "../css.css";
 import Friends from './Friends';
+import FetchFriends from './FetchFriends';
 
 
 class App extends Component {  
@@ -27,7 +28,7 @@ class App extends Component {
             <AuthRoute exact path='/login' component={Login} />
             <AuthRoute exact path='/register' component={Register} />
             <ProtectedRoute path='/posts' component={FetchPosts} />
-            <ProtectedRoute path='/friends' component={Friends} />
+            <ProtectedRoute path='/friends' component={FetchFriends} />
             <Route component={NoMatch} />
           </Switch>
         </FetchUser>
