@@ -5,37 +5,37 @@ import { connect } from 'react-redux';
 import axios from 'axios';
 
 class Friends extends React.Component {
-  state = { friends: [] }
+  state = { users: [] }
 
   componentDidMount() {
-    axios.get('/api/friends')
+      axios.get('/api/users')
       .then( res => {
-        this.setState({ friends: res.data })
+        this.setState({ users: res.data })
         this.props.dispatch({ type: 'HEADERS', headers: res.headers })
       });
   }
 
   render() {
-    let { friends } = this.state;
+    let { users } = this.state;
     return (
       <Card.Group itemsPerRow={4}>
-        { friends.map( friend =>
-            <Card key={friend.id}>
+        { users.map( user =>
+            <Card key={user.id}>
               <Card.Content>
-                <Image src={friend.picture} />
+                <Image src={user.picture} />
                 <Divider />
                 <Card.Header>
-                  {friend.name}
+                  {user.name}
                 </Card.Header>
                 <Card.Meta>
-                  {friend.city}
+                  {user.city}
                 </Card.Meta>
                 <Card.Description>
-                  {friend.quote}
+                  {user.quote}
                 </Card.Description>
               </Card.Content>
               <Card.Content extra>
-                <Link to={`/friends/${friend.id}`}>
+                <Link to={`/friends/${user.id}`}>
                 <Icon name='user' />
                   View Profile
                 </Link>
@@ -48,9 +48,10 @@ class Friends extends React.Component {
   }
 }
 
+
 const mapStateToProps = (state) => {
-  const friends = state.friends;
-  return { friends }
+  const users = state.users;
+  return { users }
 }
 
 export default connect(mapStateToProps)(Friends);

@@ -5,28 +5,35 @@ import { connect } from 'react-redux';
 import axios from 'axios';
 
 class FriendsView extends React.Component {
-  state = { liked: false}
+  state = { liked: false, user: [] }
+
+  componentDidMount() {
+    axios.get(`/api/users/${id}`)
+    .then( res => {
+      this.setState({ user: res.data })
+      this.props.dispatch({ type: 'HEADERS', headers: res.headers })
+    });
+}
 
   render() {
-    const { liked } = this.state;
-    const { friend = [] } = this.props;
+    const { liked, user } = this.state;
     return (
       <Container>
-        <Header id="spacers" as='h1' textAlign='center'>{friend.name}</Header>
+        <Header id="spacers" as='h1' textAlign='center'>{user.name}</Header>
         <Container>
           <Divider />
         </Container>
         <div id="home_page">
           <Container id="home_main">
             <div id="user_pic">User Picture</div>
-            <h4>{friend.quote}</h4>
-            <Image src={friend.picture} />
+            <h4>{user.quote}</h4>
+            <Image src={user.picture} />
           </Container>
           <Container id="home_main">
             <Link id="back_btn" to="/">
-              Like This Friend
+              Like This user
             </Link>
-            {/* TODO add list of liked friends here */}
+            {/* TODO add list of liked users here */}
           </Container>
         </div>
         
@@ -35,8 +42,9 @@ class FriendsView extends React.Component {
   }
 }
 
-const mapToProps = (state, props) => {
-  return { friend: state.friend }
+const mapStateToProps = (state, props) => {
+  const user = state.users.find( u => u.id === parseInt(props.match.params.id )) 
+  return { user };
 }
 
-export default connect(mapToProps)(FriendsView); //TODO do i need this connect here?
+export default connect(mapStateToProps)(FriendsView); //TODO do i need this connect here?

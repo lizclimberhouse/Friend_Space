@@ -16,12 +16,32 @@
   )
 end
 
-15.times do
+# 15.times do
+#   name = Faker::Name.name
+#   Friend.create(
+#     name: name,
+#     quote: Faker::Hacker.say_something_smart,
+#     picture: Faker::Avatar.image(name, '50x50', 'png', 'set1'),
+#     city: Faker::Address.city,
+#   )
+# end
+
+x = 0
+10.times do 
+  x += 1
   name = Faker::Name.name
-  Friend.create(
+  user = User.create(
     name: name,
-    quote: Faker::Hacker.say_something_smart,
     picture: Faker::Avatar.image(name, '50x50', 'png', 'set1'),
+    email: "test#{x}@test.com",
+    password: 'password',
     city: Faker::Address.city,
+    quote: Faker::Hacker.say_something_smart,
   )
+  # 5.times do 
+  #   Post.create(
+  #   body: Faker::StarWars.quote, 
+  #   user_id: user.id,
+  #   )
+ 
 end
