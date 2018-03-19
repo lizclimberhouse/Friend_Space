@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   namespace :api do
     resources :posts
     resources :users
-    #TODO get 'my_friends', to: 'friends#my_friends'
+    get 'my_friends', to: 'users#my_friends'
     #API ROUTES SHOULD GO HERE
   end
 

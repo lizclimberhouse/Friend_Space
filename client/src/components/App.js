@@ -12,8 +12,9 @@ import { Switch, Route } from 'react-router-dom';
 import Posts from './Posts';
 import FetchPosts from './FetchPosts';
 import "../css.css";
-import Friends from './Friends';
-import FetchFriends from './FetchFriends';
+import Users from './Users';
+import FetchUsers from './FetchUsers';
+import MyFriends from './MyFriends';
 
 
 class App extends Component {  
@@ -28,7 +29,8 @@ class App extends Component {
             <AuthRoute exact path='/login' component={Login} />
             <AuthRoute exact path='/register' component={Register} />
             <ProtectedRoute path='/posts' component={FetchPosts} />
-            <ProtectedRoute path='/friends' component={FetchFriends} />
+            <ProtectedRoute path='/users' component={FetchUsers} />
+            <ProtectedRoute path='/my_friends' component={MyFriends} />
             <Route component={NoMatch} />
           </Switch>
         </FetchUser>

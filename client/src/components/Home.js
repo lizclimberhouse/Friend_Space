@@ -6,21 +6,33 @@ import { connect } from 'react-redux';
 import PostForm from './PostForm';
 import { setHeaders } from '../actions/headers';
 import { getPosts } from '../actions/posts';
+import MyFriends from './MyFriends';
 import axios from 'axios';
 
 class Home extends Component {
   state = { posts: [], users: [] }
 
-  // TODO make funciton to like friends? and componentDidMount?
+  // TODO make funciton to like users? and componentDidMount?
 
   componentDidMount() {
-    axios.get('/api/users')
-    .then( res => {
-      this.setState({ users: res.data }) 
-    })
-    }
+    axios.get('/api/my_friends')
+      .then( res => {
+        this.setState({ users: res.data })
+        this.props.dispatch({ type: 'HEADERS', headers: res.headers })
+      });
+  }
 
+  addFriend = (id) => {
+    let { users } = this.state;
+    axios.put(`/api/users/${id}`)
+      .then( res => {
+        this.setState({ users: users.filter( u => u.id !== id ) })
+        this.props.dispatch({ type: 'HEADERS', headers: res.headers })
+      })
+  }
+  
   render() {
+    let { users } = this.state;
     return (
       <Container>
         <Header id="spacers" as='h1' textAlign='center'>Welcome to MySpace</Header>
@@ -33,42 +45,42 @@ class Home extends Component {
             <h3>User Name</h3>
             <h4>User Quote</h4>
           </Container>
-          <Container id="home_main">
-            <Link id="back_btn" to="/posts">
-              See Posts
-            </Link>
-            <Link id="back_btn" to="/friends">See Friends</Link>
-            <Container>              
-              { this.state.users.map( user =>
-                <Container key={user.id}>
-                <Comment.Group id="post_box" size='large'>
-                  <Comment>
-                    <Comment.Avatar as="a" src={user.picture} />
-                    <Comment.Content>
-                      <Comment.Author as="a">{user.name}</Comment.Author>
-                      <Comment.Metadata>
-                        <div>{user.city}</div>
-                      </Comment.Metadata>
-                      <Divider />
-                      <Comment.Text>
-                      <div>{user.email}</div>
-                      </Comment.Text>
-                      <Comment.Actions>
-                        <Link id="view_post_link" to={`/friends/${user.id}`}>
-                          View Profile
-                        </Link>
-                      </Comment.Actions>
-                    </Comment.Content>
-                  </Comment>
-                </Comment.Group>
-                </Container>
-              )}
-
-
+          <div id="left-margin">
+            <Container id="home_side">
+              <Link id="back_btn" to="/posts">See Posts</Link>
+              <Link id="back_btn" to="/users">See Users</Link>
             </Container>
-          </Container>
+            <div id="home_main">   
+              <Link to="/my_friends">My Friends</Link>
+              <Container>
+                { users.map( user =>
+                  <Container key={user.id}>
+                  <Comment.Group id="post_box" size='large'>
+                    <Comment>
+                      <Comment.Avatar as="a" src={user.picture} />
+                      <Comment.Content>
+                        <Comment.Author as="a">{user.name}</Comment.Author>
+                        <Comment.Metadata>
+                          <div>{user.city}</div>
+                        </Comment.Metadata>
+                        <Divider />
+                        <Comment.Text>
+                        <div>{user.email}</div>
+                        </Comment.Text>
+                        <Comment.Actions>
+                          <Link id="view_post_link" to={`/users/${user.id}`}>
+                            View Profile
+                          </Link>
+                        </Comment.Actions>
+                      </Comment.Content>
+                    </Comment>
+                  </Comment.Group>
+                  </Container>
+                )}
+              </Container>
+            </div>
+          </div>
         </div>
-        
       </Container>
     )
   }

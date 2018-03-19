@@ -1,14 +1,13 @@
 import React from 'react';
-import { Card, Image, Grid, Divider, Icon } from 'semantic-ui-react';
-import { Link } from 'react-router-dom';
+import { Card, Image, Grid, Divider } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import axios from 'axios';
 
-class Friends extends React.Component {
+class MyFriends extends React.Component {
   state = { users: [] }
 
   componentDidMount() {
-      axios.get('/api/users')
+    axios.get('/api/my_friends')
       .then( res => {
         this.setState({ users: res.data })
         this.props.dispatch({ type: 'HEADERS', headers: res.headers })
@@ -27,18 +26,6 @@ class Friends extends React.Component {
                 <Card.Header>
                   {user.name}
                 </Card.Header>
-                <Card.Meta>
-                  {user.city}
-                </Card.Meta>
-                <Card.Description>
-                  {user.quote}
-                </Card.Description>
-              </Card.Content>
-              <Card.Content extra>
-                <Link to={`/friends/${user.id}`}>
-                <Icon name='user' />
-                  View Profile
-                </Link>
               </Card.Content>
             </Card>
           )
@@ -48,10 +35,4 @@ class Friends extends React.Component {
   }
 }
 
-
-const mapStateToProps = (state) => {
-  const users = state.users;
-  return { users }
-}
-
-export default connect(mapStateToProps)(Friends);
+export default connect()(MyFriends)

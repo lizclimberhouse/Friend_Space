@@ -67,7 +67,11 @@ Button {
   flex-direction: column;
 }
 
-/* #home_side {
+#left-margin {
+  margin-left: 80px;
+}
+
+#home_side {
   display: flex;
-  flex-direction: column;
-} */
+  flex-direction: row;
+}
