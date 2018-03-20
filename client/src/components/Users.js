@@ -36,7 +36,7 @@ class Users extends React.Component {
                     {user.name}
                   </Card.Header>
                   <Card.Meta>
-                    {user.city}
+                    {user.city} | {user.email}
                   </Card.Meta>
                   <Card.Description>
                     {user.quote}

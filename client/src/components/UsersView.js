@@ -33,9 +33,10 @@ class UsersView extends React.Component {
           </Container>
           <Container id="home_main">
             <h1>{user.name}</h1>
+            <p>email: {user.email}</p>
             <h3>Location: {user.city}</h3>
             <h4>Quote: {user.quote}</h4>
-            < key={user.id} onClick={ () => this.addFriend(user.id)}><Icon name='heart' />Add Friend</a>
+            <a key={user.id} onClick={ () => this.addFriend(user.id)}><Icon name='heart' />Add Friend</a>
           </Container>
         </div>
         

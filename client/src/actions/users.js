@@ -9,3 +9,7 @@ export const getUsers = () => {
       .then( res => dispatch({ type: USERS, users: res.data, headers: res.headers  }) )
     }
 }
+
+export const updateUser = () => {
+  // TODO
+}

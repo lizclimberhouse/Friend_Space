@@ -7,6 +7,7 @@ import PostForm from './PostForm';
 import { setHeaders } from '../actions/headers';
 import { getPosts } from '../actions/posts';
 import MyFriends from './MyFriends';
+import EditProfile from './EditProfile';
 import axios from 'axios';
 
 class Home extends Component {
@@ -41,9 +42,12 @@ class Home extends Component {
         </Container>
         <div id="home_page">
           <Container id="home_main">
-            <div id="user_pic">User Picture</div>
-            <h3>User Name</h3>
-            <h4>User Quote</h4>
+            <div id="user_pic">{this.props.currentUser.picture}</div>
+            <Link id="back_btn" to="/edit_profile">Edit Profile</Link>
+            <h1>{this.props.currentUser.name}</h1>
+            <p>email: {this.props.currentUser.email}</p>
+            <h3>Location: {this.props.currentUser.city}</h3>
+            <h4>Quote: {this.props.currentUser.quote}</h4>
           </Container>
           <div id="left-margin">
             <Container id="home_side">
@@ -86,4 +90,11 @@ class Home extends Component {
   }
 }
 
-export default connect()(Home); //TODO do i need this connect here?
+//store-
+const mapStateToProps = (state) => { 
+  return {
+    currentUser: state.user,
+  }
+}
+
+export default connect(mapStateToProps)(Home); //TODO do i need this connect here?

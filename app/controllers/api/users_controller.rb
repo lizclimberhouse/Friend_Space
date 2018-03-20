@@ -8,6 +8,10 @@ class Api::UsersController < ApplicationController
     render json: User.liked(current_user.liked_friends)
   end
 
+  def edit_profile
+    render json: current_user
+  end
+
   def show
     @user = User.find(params[:id])
     render json: @user 
