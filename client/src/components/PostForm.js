@@ -27,6 +27,7 @@ class PostForm extends React.Component {
   handleSubmit = (e) => {
     e.preventDefault()
     const post = {...this.state}
+    debugger
     const { closeForm, dispatch } = this.props
     const func = this.props.id ? updatePost : addPost
     dispatch(func(post))

@@ -2,7 +2,7 @@ import React from 'react';
 import { Card, Image, Grid, Divider } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import axios from 'axios';
-import { updateUser } from '../actions/users';
+import { editUser } from '../actions/users';
 import { Form } from 'semantic-ui-react';
 
 class EditProfile extends React.Component {
@@ -27,10 +27,10 @@ class EditProfile extends React.Component {
 
   handleSubmit = (e) => {
     e.preventDefault()
-    const user = {...this.state}
+    const currentUser = {...this.state}
+    debugger 
     const { closeForm, dispatch } = this.props
-    const updateUser = this.props.id
-    dispatch(updateUser(user))
+    dispatch(editUser(currentUser))
     closeForm()
   }
 
@@ -68,5 +68,6 @@ class EditProfile extends React.Component {
     )
   }
 }
+
 
 export default connect()(EditProfile)

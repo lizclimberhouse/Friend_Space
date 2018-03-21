@@ -11,7 +11,7 @@ import EditProfile from './EditProfile';
 import axios from 'axios';
 
 class Home extends Component {
-  state = { posts: [], users: [] }
+  state = { posts: [], users: [], showProfileForm: false }
 
   // TODO make funciton to like users? and componentDidMount?
 
@@ -31,9 +31,17 @@ class Home extends Component {
         this.props.dispatch({ type: 'HEADERS', headers: res.headers })
       })
   }
+
+  toggleProfileForm = () => {
+    this.setState( state => {
+      return { showProfileForm: !state.showProfileForm }
+    })
+  }
   
   render() {
     let { users } = this.state;
+    let { currentUser } = this.props;
+    const { showProfileForm } = this.state;
     return (
       <Container>
         <Header id="spacers" as='h1' textAlign='center'>Welcome to MySpace</Header>
@@ -43,57 +51,63 @@ class Home extends Component {
         <div id="home_page">
           <Container id="home_main">
             <div id="user_pic">{this.props.currentUser.picture}</div>
-            <Link id="back_btn" to="/edit_profile">Edit Profile</Link>
-            <h1>{this.props.currentUser.name}</h1>
-            <p>email: {this.props.currentUser.email}</p>
-            <h3>Location: {this.props.currentUser.city}</h3>
-            <h4>Quote: {this.props.currentUser.quote}</h4>
+            <Button color="blue" onClick={this.toggleProfileForm}>
+              { showProfileForm ? 'Cancel' : 'Edit' }
+            </Button>
           </Container>
-          <div id="left-margin">
-            <Container id="home_side">
-              <Link id="back_btn" to="/posts">See Posts</Link>
-              <Link id="back_btn" to="/users">See Users</Link>
-            </Container>
-            <div id="home_main">   
-              <Link to="/my_friends">My Friends</Link>
-              <Container>
-                { users.map( user =>
-                  <Container key={user.id}>
-                  <Comment.Group id="post_box" size='large'>
-                    <Comment>
-                      <Comment.Avatar as="a" src={user.picture} />
-                      <Comment.Content>
-                        <Comment.Author as="a">{user.name}</Comment.Author>
-                        <Comment.Metadata>
-                          <div>{user.city}</div>
-                        </Comment.Metadata>
-                        <Divider />
-                        <Comment.Text>
-                        <div>{user.email}</div>
-                        </Comment.Text>
-                        <Comment.Actions>
-                          <Link id="view_post_link" to={`/users/${user.id}`}>
-                            View Profile
-                          </Link>
-                        </Comment.Actions>
-                      </Comment.Content>
-                    </Comment>
-                  </Comment.Group>
-                  </Container>
-                )}
-              </Container>
-            </div>
-          </div>
         </div>
-      </Container>
+        <div>
+          <h1>{currentUser.name}</h1>
+          <p>email: {currentUser.email}</p>
+          <h3>Location: {currentUser.city}</h3>
+          <h4>Quote: {currentUser.quote}</h4>
+        </div>
+          { showProfileForm ? 
+            <EditProfile {...currentUser} closeForm={this.toggleProfileForm} />
+            :
+            <div>
+                <Container id="home_side">
+                  <Link id="back_btn" to="/posts">See Posts</Link>
+                  <Link id="back_btn" to="/users">See Users</Link>
+                </Container>
+                <Link to="/my_friends">My Friends</Link>
+                <Container>
+                  { users.map( user =>
+                    <Container key={user.id}>
+                    <Comment.Group id="post_box" size='large'>
+                      <Comment>
+                        <Comment.Avatar as="a" src={user.picture} />
+                        <Comment.Content>
+                          <Comment.Author as="a">{user.name}</Comment.Author>
+                          <Comment.Metadata>
+                            <div>{user.city}</div>
+                          </Comment.Metadata>
+                          <Divider />
+                          <Comment.Text>
+                          <div>{user.email}</div>
+                          </Comment.Text>
+                          <Comment.Actions>
+                            <Link id="view_post_link" to={`/users/${user.id}`}>
+                              View Profile
+                            </Link>
+                          </Comment.Actions>
+                        </Comment.Content>
+                      </Comment>
+                    </Comment.Group>
+                    </Container>
+                  )}
+                </Container>
+              </div>
+          }
+      </Container>       
     )
   }
 }
 
 //store-
-const mapStateToProps = (state) => { 
+const mapStateToProps = (state, props) => { 
   return {
-    currentUser: state.user,
+    currentUser: state.user
   }
 }
 

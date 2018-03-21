@@ -15,6 +15,7 @@ import "../css.css";
 import Users from './Users';
 import FetchUsers from './FetchUsers';
 import MyFriends from './MyFriends';
+import EditProfile from './EditProfile';
 
 
 class App extends Component {  
@@ -31,6 +32,7 @@ class App extends Component {
             <ProtectedRoute path='/posts' component={FetchPosts} />
             <ProtectedRoute path='/users' component={FetchUsers} />
             <ProtectedRoute path='/my_friends' component={MyFriends} />
+            <ProtectedRoute path='/edit_profile' component={EditProfile} />
             <Route component={NoMatch} />
           </Switch>
         </FetchUser>
