@@ -6,36 +6,41 @@ import { editUser } from '../actions/users';
 import { Form } from 'semantic-ui-react';
 
 class EditProfile extends React.Component {
-  initialUserState = {
+  
+  state = {
+    initialUserState: {
     name: '',
     quote: '',
     picture: '',
     city: '',
-  }
-
-  state = {...this.initialUserState}
+  },
+}
 
   componentWillMount() {
-    if (this.props.id)
-      this.setState({ ...this.props })
+    const { user: { name, quote, picture, city }} = this.props
+    this.setState({ initialUserState: { name, quote, picture, city } })
   }
 
   handleChange = (e) => {
     const { name, value } = e.target
-    this.setState({ [name]: value })
+    this.setState({ 
+      initialUserState: {
+        ...this.state.initialUserState,
+        [name]: value
+      } 
+    })
   }
 
   handleSubmit = (e) => {
     e.preventDefault()
-    const currentUser = {...this.state}
-    debugger 
-    const { closeForm, dispatch } = this.props
-    dispatch(editUser(currentUser))
+    const { initialUserState: { name, quote, picture, city }} = this.state;
+    const { closeForm, user, dispatch } = this.props
+    dispatch(editUser(user.id, { name, quote, picture, city }))
     closeForm()
   }
 
   render() {
-    const { name, quote, picture, city } = this.props
+    const { initialUserState: { name, quote, picture, city }} = this.state
     return (
       <Form onSubmit={this.handleSubmit}>
         <Form.Input
@@ -69,5 +74,8 @@ class EditProfile extends React.Component {
   }
 }
 
+const mapStateToProps = (state, props) => {
+  return { user: state.user}
+}
 
-export default connect()(EditProfile)
+export default connect(mapStateToProps)(EditProfile)

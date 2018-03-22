@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import axios from 'axios';
 
 class UsersView extends React.Component {
-  state = { user: {} }
+  state = { user: [] }
 
   componentDidMount() {
     axios.get(`/api/users/${this.props.match.params.id}`)
@@ -46,9 +46,7 @@ class UsersView extends React.Component {
 }
 
 const mapStateToProps = (state, props) => {
-  const user = state.users.find( u => u.id === parseInt(props.match.params.id )) 
-  return { user };
+  return { user: state.user }
 }
 
-// export default connect(mapStateToProps)(UsersView); //TODO do i need this connect here?
-export default UsersView; //TODO do i need this connect here?
+export default connect(mapStateToProps)(UsersView);

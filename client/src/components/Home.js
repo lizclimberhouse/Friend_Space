@@ -11,14 +11,14 @@ import EditProfile from './EditProfile';
 import axios from 'axios';
 
 class Home extends Component {
-  state = { posts: [], users: [], showProfileForm: false }
+  state = { posts: [], my_friends: [], showProfileForm: false }
 
   // TODO make funciton to like users? and componentDidMount?
 
   componentDidMount() {
     axios.get('/api/my_friends')
       .then( res => {
-        this.setState({ users: res.data })
+        this.setState({ my_friends: res.data })
         this.props.dispatch({ type: 'HEADERS', headers: res.headers })
       });
   }
@@ -39,7 +39,7 @@ class Home extends Component {
   }
   
   render() {
-    let { users } = this.state;
+    let { my_friends } = this.state;
     let { currentUser } = this.props;
     const { showProfileForm } = this.state;
     return (
@@ -48,46 +48,49 @@ class Home extends Component {
         <Container>
           <Divider />
         </Container>
-        <div id="home_page">
-          <Container id="home_main">
-            <div id="user_pic">{this.props.currentUser.picture}</div>
-            <Button color="blue" onClick={this.toggleProfileForm}>
+        <div id="main_profile">
+          <Container>
+            <Image id="user_pic" src={currentUser.picture} />
+            <Button id="spacers" color="blue" onClick={this.toggleProfileForm}>
               { showProfileForm ? 'Cancel' : 'Edit' }
             </Button>
+
+            <h1>{currentUser.name}</h1>
+            <p>email: {currentUser.email}</p>
+            <h3>Location: {currentUser.city}</h3>
+            <h4>Quote: {currentUser.quote}</h4>
           </Container>
-        </div>
-        <div>
-          <h1>{currentUser.name}</h1>
-          <p>email: {currentUser.email}</p>
-          <h3>Location: {currentUser.city}</h3>
-          <h4>Quote: {currentUser.quote}</h4>
-        </div>
-          { showProfileForm ? 
-            <EditProfile {...currentUser} closeForm={this.toggleProfileForm} />
+            { showProfileForm ? 
+            <aside id="side_col">
+              <EditProfile {...currentUser} closeForm={this.toggleProfileForm} />
+            </aside>
             :
-            <div>
-                <Container id="home_side">
+            <aside id="side_col">
+                <Container>
                   <Link id="back_btn" to="/posts">See Posts</Link>
                   <Link id="back_btn" to="/users">See Users</Link>
                 </Container>
-                <Link to="/my_friends">My Friends</Link>
+                <br />
                 <Container>
-                  { users.map( user =>
-                    <Container key={user.id}>
+                  <Link id="friends_btn" to="/my_friends">My Friends</Link>
+                </Container>
+                <Container>
+                  { my_friends.map( my_friend =>
+                    <Container key={my_friend.id}>
                     <Comment.Group id="post_box" size='large'>
                       <Comment>
-                        <Comment.Avatar as="a" src={user.picture} />
+                        <Comment.Avatar as="a" src={my_friend.picture} />
                         <Comment.Content>
-                          <Comment.Author as="a">{user.name}</Comment.Author>
+                          <Comment.Author as="a">{my_friend.name}</Comment.Author>
                           <Comment.Metadata>
-                            <div>{user.city}</div>
+                            <div>{my_friend.city}</div>
                           </Comment.Metadata>
                           <Divider />
                           <Comment.Text>
-                          <div>{user.email}</div>
+                          <div>{my_friend.email}</div>
                           </Comment.Text>
                           <Comment.Actions>
-                            <Link id="view_post_link" to={`/users/${user.id}`}>
+                            <Link id="view_post_link" to={`/users/${my_friend.id}`}>
                               View Profile
                             </Link>
                           </Comment.Actions>
@@ -97,14 +100,14 @@ class Home extends Component {
                     </Container>
                   )}
                 </Container>
-              </div>
-          }
+              </aside>
+            }
+        </div>
       </Container>       
     )
   }
 }
 
-//store-
 const mapStateToProps = (state, props) => { 
   return {
     currentUser: state.user

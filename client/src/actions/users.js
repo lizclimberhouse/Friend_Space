@@ -11,9 +11,17 @@ export const getUsers = () => {
     }
 }
 
-export const editUser = (user) => {
+export const editUser = (id, user) => {
   return (dispatch) => {
-    axios.put(`/api/users/${user.id}`, { user } )
-      .then( res => dispatch({ type: UPDATE_USER, user: res.data, headers: res.headers  }) )
+    //let data = new FormData()
+    let url = `/api/edit_profile`
+    axios.put(url, { user })
+      .then( res => {
+        dispatch({
+          type: UPDATE_USER,
+          user: res.data,
+          headers: res.headers
+        })
+      })
   }
 }

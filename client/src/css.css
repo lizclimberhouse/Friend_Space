@@ -32,17 +32,23 @@ Button {
 }
 
 #back_btn {
-  font-size: 1rem;
   cursor: pointer;
-  box-shadow: 0 0 0 1px transparent inset, 0 0 0 0 rgba(34,36,38,.15) inset;
-  outline: 0;
-  border: none;
   font-weight: 700;
   color: rgba(0,0,0,.6);
   background-color: #e0e1e2;
-  padding: .78571429em 1.5em .78571429em;
-  margin: 5px 5px 5px 0;
+  padding: 5px 15px;
+  margin: 10px 10px;
   border-radius: .28571429rem;
+}
+
+#friends_btn {
+  cursor: pointer;
+  font-weight: 700;
+  padding: 5px 15px;
+  margin: 10px 10px;
+  border-radius: .28571429rem;
+  background-color: #2185d0;
+  color: #fff;
 }
 
 #nav_btn {
@@ -57,21 +63,17 @@ Button {
   background-color: azure;
 }
 
-#home_page {
-  display: flex;
-  flex-direction: row;
-}
-
-#home_main {
+#side_col {
   display: flex;
   flex-direction: column;
+  width: 50%;
+}
+
+#main_profile {
+  display: flex;
+  flex-direction: row;
 }
 
 #left-margin {
   margin-left: 80px;
-}
-
-#home_side {
-  display: flex;
-  flex-direction: row;
 }

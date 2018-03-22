@@ -4,7 +4,7 @@ Rails.application.routes.draw do
     resources :posts
     resources :users
     get 'my_friends', to: 'users#my_friends'
-    get 'edit_profile', to: 'users#edit_profile'
+    put 'edit_profile', to: 'users#edit_profile'
     #API ROUTES SHOULD GO HERE
   end
 
