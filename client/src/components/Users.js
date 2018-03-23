@@ -12,6 +12,7 @@ class Users extends React.Component {
       .then( res => this.setState({ users: res.data }) )
   }
 
+  // using react with out redux...no action or reducer at all. action and reducers are only for redux
   addFriend = (id) => {
     let { users } = this.state;
     axios.put(`/api/users/${id}`)

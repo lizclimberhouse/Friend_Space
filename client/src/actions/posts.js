@@ -8,8 +8,9 @@ export const DELETE_POST = 'DELETE_POST';
 
 export const getPosts = () => {
   return (dispatch) => {
-    axios.get('/api/posts')
+    axios.get('/api/posts') // send to controller and gets data
       .then( res => dispatch({ type: POSTS, posts: res.data, headers: res.headers  }) )
+      // back to reducer
     }
 }
 
