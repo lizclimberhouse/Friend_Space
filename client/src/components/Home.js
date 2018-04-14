@@ -5,7 +5,7 @@ import NavBar from './NavBar';
 import { connect } from 'react-redux';
 import PostForm from './PostForm';
 import { setHeaders } from '../actions/headers';
-import { getPosts } from '../actions/posts';
+// import { getPosts } from '../actions/posts';
 import MyFriends from './MyFriends';
 import EditProfile from './EditProfile';
 import axios from 'axios';

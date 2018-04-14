@@ -11,12 +11,14 @@ class Api::PostsController < ApplicationController
   end
 
   def create
-    post = current_user.post.new(post_params)
+    post = Post.new(post_params)
+    # post = current_user.post.new(post_params)
 
     if post.save
       render json: post
     else
-      render json: { errors: post.errors.full_messages.join(',') }, status: 422
+      render json: post.errors, status: 422
+      # render json: { errors: post.errors.full_messages.join(',') }, status: 422
     end
   end
 
@@ -24,7 +26,8 @@ class Api::PostsController < ApplicationController
     if @post.update(post_params)
       render json: @post
     else
-      render json: { errors: post.errors.full_messages.join(',') }, status: 422
+      render json: post.errors, status: 422
+      # render json: { errors: post.errors.full_messages.join(',') }, status: 422
     end
   end
 

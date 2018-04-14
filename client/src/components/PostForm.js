@@ -14,7 +14,7 @@ class PostForm extends React.Component {
 
   state = {...this.initialPostState}
 
-  componentWillMount() {
+  componentWillMount() { //TODO might want to change this to DidMount
     if (this.props.id)
       this.setState({ ...this.props })
   }

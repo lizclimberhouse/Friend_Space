@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { getPosts } from '../actions/posts';
+// import { getPosts } from '../actions/posts';
 import { Container, Grid, Header, Card, Image, Button, Dropdown, Divider, Comment, Icon } from 'semantic-ui-react';
 import PostForm from './PostForm';
 
